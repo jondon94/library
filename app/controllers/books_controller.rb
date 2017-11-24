@@ -3,9 +3,14 @@ class BooksController < ApplicationController
 
   # GET /books
   # GET /books.json
-  def index
 
+  def home
+    @books = Book.all
+  end
+
+  def index
     @books = current_user.books
+
   end
 
   # GET /books/1
@@ -20,12 +25,16 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    if(@book.user.id != current_user.id)
+      redirect_to books_path
+    end
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = Book.new(book_params)
+    @books = current_user.books
 
     respond_to do |format|
       if @book.save
@@ -41,6 +50,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    @books = current_user.books
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -55,6 +65,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
+    @books = current_user.books
     @book.destroy
     respond_to do |format|
       format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
