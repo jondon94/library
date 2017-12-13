@@ -5,8 +5,8 @@
   <%= link_to 'Show', book %>
   <%= link_to 'Edit', edit_book_path(book) %>
   <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %> <br>
-  <%= book.user_id %>
-  <%= book.title %> <br>
-  <%= book.genre %> <br>
+  User ID: <%= book.user_id %> <br>
+  <h4>Title:</h4> <%= book.title %> <br>
+  <h4>Genre:</h4> <%= book.genre %> <br>
   ---------------- <br>
 <% end %>
